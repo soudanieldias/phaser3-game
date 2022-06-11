@@ -5,12 +5,20 @@ export default class Demo extends Phaser.Scene {
     super('GameScene');
   }
 
-  preload() {
-    
+  preload() { // Preload of elements used in game (images, songs, etc)
+    // Images
+    this.load.image('sky', 'assets/sky.png');
+    this.load.image('ground', 'assets/platform.png');
+    this.load.image('star', 'assets/star.png');
+    this.load.image('form', 'assets/forms.png');
+
+    //Audios/Songs/Effects
+    this.load.audio('backgroundSong', ['../public/assets/audio/backgroundSong.mp3']);
   }
 
-  create() {
-
+  create() { // Assignment & Bind of elements to Scene
+    const backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
+    backgroundSong.play();
   }
 
   update () {
