@@ -48,9 +48,21 @@ export default class Demo extends Phaser.Scene {
     var levelText = this.add.text(16, 50, 'Level: 1', { fontSize: '32px', color: '#000' });
     var levelValue = 1;
 
+    // Element - Stars
+    var stars = this.physics.add.group({
+      key: 'star',
+      repeat: 11,
+      setXY: { x: 12, y: 0, stepX: 70 }
+    });
+
+    stars.children.iterate((child) => {
+      (child as Phaser.Physics.Arcade.Sprite).setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+  });
+
     // Colliders (Collision Events)
     this.physics.add.collider(player, platforms); // Collision of Players -> Platform
     this.physics.add.collider(bombs, platforms); // Collision of Bombs -> Platform
+    this.physics.add.collider(stars, platforms); // Collision of Stars -> Platform
   
     // Overlaps
     
