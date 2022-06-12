@@ -7,6 +7,8 @@ export default class Demo extends Phaser.Scene {
   
   private player: Phaser.Physics.Arcade.Sprite;
 
+  private platforms: Phaser.Physics.Arcade.StaticGroup;
+
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
     this.load.image('sky', '/assets/sky.png');
@@ -28,11 +30,11 @@ export default class Demo extends Phaser.Scene {
     
     // Elements
     // Element - Platforms
-    var platforms = this.physics.add.staticGroup();
-    platforms.create(400, 568, 'ground').setScale(3).refreshBody();
-    platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground');
+    this.platforms = this.physics.add.staticGroup();
+    this.platforms.create(400, 568, 'ground').setScale(3).refreshBody();
+    this.platforms.create(600, 400, 'ground');
+    this.platforms.create(50, 250, 'ground');
+    this.platforms.create(750, 220, 'ground');
 
     // Element - Player
     this.player = this.physics.add.sprite(100, 450, 'dude');
@@ -62,9 +64,9 @@ export default class Demo extends Phaser.Scene {
   });
 
     // Colliders (Collision Events)
-    this.physics.add.collider(this.player, platforms); // Collision of Players -> Platform
-    this.physics.add.collider(bombs, platforms); // Collision of Bombs -> Platform
-    this.physics.add.collider(stars, platforms); // Collision of Stars -> Platform
+    this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
+    this.physics.add.collider(bombs, this.platforms); // Collision of Bombs -> Platform
+    this.physics.add.collider(stars, this.platforms); // Collision of Stars -> Platform
   
     // Overlaps
     
