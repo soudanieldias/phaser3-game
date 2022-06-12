@@ -31,6 +31,8 @@ export default class Demo extends Phaser.Scene {
 
   private cursors: any;
 
+  private restartButton: any;
+
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
     this.load.image('sky', '/assets/sky.png');
@@ -84,6 +86,13 @@ export default class Demo extends Phaser.Scene {
     });
 
     this.generateStars();
+
+    // Element - restartButton
+    this.restartButton = this.add.text(600, 20, 'Restart', { fontSize: '32px', color: '#000' })
+    .setInteractive({ useHandCursor: true })
+    .on('pointerdown', () => { this.backgroundSong.stop(); this.scene.restart() })
+    .on('pointerover', () => this.restartButton.setStyle({ color: '#f39c12' }))
+    .on('pointerout', () => this.restartButton.setStyle({ color: '#FFF' }))
 
     // Colliders (Collision Events)
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
