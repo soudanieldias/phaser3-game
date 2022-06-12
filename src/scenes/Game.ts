@@ -42,6 +42,28 @@ export default class Demo extends Phaser.Scene {
 
     // Overlaps
     
+    // Animations
+    // Animation - Player
+    this.anims.create({
+      key: 'left',
+      frames: this.anims.generateFrameNumbers('dude', { start: 0, end: 3 }),
+      frameRate: 20,
+      repeat: -1
+    });
+
+    this.anims.create({
+      key: 'turn',
+      frames: [ { key: 'dude', frame: 4 } ],
+      frameRate: 30
+    });
+
+    this.anims.create({
+      key: 'right',
+      frames: this.anims.generateFrameNumbers('dude', { start: 5, end: 8 }),
+      frameRate: 20,
+      repeat: -1
+    });
+
     // Audios - Songs - Effects
     var backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
     backgroundSong.play();
