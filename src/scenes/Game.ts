@@ -77,9 +77,7 @@ export default class Demo extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 70 }
     });
 
-    this.stars.children.iterate((child) => {
-      (child as Phaser.Physics.Arcade.Sprite).setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
-  });
+    this.generateStars();
 
     // Colliders (Collision Events)
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
@@ -140,6 +138,12 @@ export default class Demo extends Phaser.Scene {
     if (this.cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-330);
     }
+  }
+
+  private generateStars () {
+    this.stars.children.iterate((child) => {
+      (child as Phaser.Physics.Arcade.Sprite).setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    });
   }
 
   private collectStar (_player:any, star:any) {
