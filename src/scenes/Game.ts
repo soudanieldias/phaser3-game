@@ -37,6 +37,12 @@ export default class Demo extends Phaser.Scene {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
+    // Element - scoreText
+    var scoreText = this.add.text(16, 20, 'score: 0', { fontSize: '32px', color: '#000' });
+    
+    // Element - levelText
+    var levelText = this.add.text(16, 50, 'Level: 1', { fontSize: '32px', color: '#000' });
+
     // Colliders (Collision Events)
     this.physics.add.collider(player, platforms); // Collision of Players -> Platform
 
