@@ -40,11 +40,13 @@ export default class Demo extends Phaser.Scene {
     // Element - Bombs
     var bombs = this.physics.add.group();
   
-    // Element - scoreText
+    // Element - scoreText & scoreValue
     var scoreText = this.add.text(16, 20, 'score: 0', { fontSize: '32px', color: '#000' });
-    
-    // Element - levelText
+    var scoreValue = 0;
+
+    // Element - levelText & levelValue
     var levelText = this.add.text(16, 50, 'Level: 1', { fontSize: '32px', color: '#000' });
+    var levelValue = 1;
 
     // Colliders (Collision Events)
     this.physics.add.collider(player, platforms); // Collision of Players -> Platform
