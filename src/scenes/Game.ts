@@ -5,7 +5,7 @@ export default class Demo extends Phaser.Scene {
     super('GameScene');
   }
 
-  preload() { // Preload of elements used in game (images, songs, etc)
+  public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
     this.load.image('sky', '/assets/sky.png');
     this.load.image('ground', '/assets/platform.png');
@@ -20,7 +20,7 @@ export default class Demo extends Phaser.Scene {
 
   }
 
-  create() { // Assignment & Bind of elements to Scene
+  public create () { // Assignment & Bind of elements to Scene
     // Images
     this.add.image(400, 300, 'sky');
     
@@ -98,7 +98,7 @@ export default class Demo extends Phaser.Scene {
 
   }
 
-  update () {
+  public update () {
 
   }
 }
