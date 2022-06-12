@@ -27,6 +27,8 @@ export default class Demo extends Phaser.Scene {
 
   private deathSong: Phaser.Sound.BaseSound;
 
+  private collectSong: Phaser.Sound.BaseSound;
+
   private cursors: any;
 
   public preload () { // Preload of elements used in game (images, songs, etc)
@@ -42,7 +44,8 @@ export default class Demo extends Phaser.Scene {
     // Audios - Songs - Effects
     this.load.audio('backgroundSong', ['/assets/audio/backgroundSong.mp3']);
     this.load.audio('powerUp', ['assets/audio/powerup.mp3']);
-    this.load.audio('deathSong', ['assets/audio/death.mp3'])
+    this.load.audio('deathSong', ['assets/audio/death.mp3']);
+    this.load.audio('collectSong', ['assets/audio/coin.mp3']);
   }
 
   public create () { // Assignment & Bind of elements to Scene
@@ -118,6 +121,7 @@ export default class Demo extends Phaser.Scene {
     this.backgroundSong.play();
     this.powerUpSong = this.sound.add('powerUp');
     this.deathSong = this.sound.add('deathSong');
+    this.collectSong = this.sound.add('collectSong');
 
     // Events
     // Event - Cursor
@@ -179,6 +183,7 @@ export default class Demo extends Phaser.Scene {
 
     this.scoreValue += 10;
     this.scoreText.setText('Score: ' + this.scoreValue);
+    this.collectSong.play();
 
     if (this.stars.countActive(true) === 0) {
       this.powerUpSong.play();
