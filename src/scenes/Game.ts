@@ -17,7 +17,9 @@ export default class Demo extends Phaser.Scene {
 
   private bombs: Phaser.Physics.Arcade.Group;
 
-  private backgroundSong: Phaser.Sound;
+  private backgroundSong: Phaser.Sound.BaseSound;
+
+  private cursors: any;
 
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
@@ -108,7 +110,7 @@ export default class Demo extends Phaser.Scene {
 
     // Events
     // Event - Cursor
-    var cursors = this.input.keyboard.createCursorKeys();
+    this.cursors = this.input.keyboard.createCursorKeys();
 
   }
 
