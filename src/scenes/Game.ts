@@ -9,6 +9,10 @@ export default class Demo extends Phaser.Scene {
 
   private platforms: Phaser.Physics.Arcade.StaticGroup;
 
+  private scoreValue: number = 0;
+
+  private levelValue: number = 1;
+
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
     this.load.image('sky', '/assets/sky.png');
@@ -46,11 +50,11 @@ export default class Demo extends Phaser.Scene {
   
     // Element - scoreText & scoreValue
     var scoreText = this.add.text(16, 20, 'score: 0', { fontSize: '32px', color: '#000' });
-    var scoreValue = 0;
+    // var scoreValue = 0;
 
     // Element - levelText & levelValue
     var levelText = this.add.text(16, 50, 'Level: 1', { fontSize: '32px', color: '#000' });
-    var levelValue = 1;
+    // var levelValue = 1;
 
     // Element - Stars
     var stars = this.physics.add.group({
