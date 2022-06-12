@@ -40,6 +40,10 @@ export default class Demo extends Phaser.Scene {
     // Colliders (Collision Events)
     this.physics.add.collider(player, platforms); // Collision of Players -> Platform
 
+    // Overlaps
+    
+    // Audios - Songs - Effects
+
   }
 
   update () {
