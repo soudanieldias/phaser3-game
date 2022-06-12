@@ -90,7 +90,7 @@ export default class Demo extends Phaser.Scene {
     // Element - restartButton
     this.restartButton = this.add.text(600, 20, 'Restart', { fontSize: '32px', color: '#000' })
     .setInteractive({ useHandCursor: true })
-    .on('pointerdown', () => { this.backgroundSong.stop(); this.scene.restart() })
+    .on('pointerdown', () => this.resetGame())
     .on('pointerover', () => this.restartButton.setStyle({ color: '#f39c12' }))
     .on('pointerout', () => this.restartButton.setStyle({ color: '#FFF' }))
 
@@ -178,6 +178,13 @@ export default class Demo extends Phaser.Scene {
     newBomb.setCollideWorldBounds(true);
     newBomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
     newBomb.setScale(0.5);
+  }
+
+  private resetGame () {
+    this.backgroundSong.stop();
+    this.scene.restart();
+    this.levelValue = 1;
+    this.scoreValue = 0;
   }
 
   private bombHit () {
