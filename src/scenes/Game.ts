@@ -4,6 +4,8 @@ export default class Demo extends Phaser.Scene {
   constructor() {
     super('GameScene');
   }
+  
+  private player: Phaser.Physics.Arcade.Sprite;
 
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
@@ -33,9 +35,9 @@ export default class Demo extends Phaser.Scene {
     platforms.create(750, 220, 'ground');
 
     // Element - Player
-    var player = this.physics.add.sprite(100, 450, 'dude');
-    player.setBounce(0.2);
-    player.setCollideWorldBounds(true);
+    this.player = this.physics.add.sprite(100, 450, 'dude');
+    this.player.setBounce(0.2);
+    this.player.setCollideWorldBounds(true);
 
     // Element - Bombs
     var bombs = this.physics.add.group();
@@ -60,7 +62,7 @@ export default class Demo extends Phaser.Scene {
   });
 
     // Colliders (Collision Events)
-    this.physics.add.collider(player, platforms); // Collision of Players -> Platform
+    this.physics.add.collider(this.player, platforms); // Collision of Players -> Platform
     this.physics.add.collider(bombs, platforms); // Collision of Bombs -> Platform
     this.physics.add.collider(stars, platforms); // Collision of Stars -> Platform
   
