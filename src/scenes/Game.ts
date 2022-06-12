@@ -37,6 +37,9 @@ export default class Demo extends Phaser.Scene {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
+    // Element - Bombs
+    var bombs = this.physics.add.group();
+  
     // Element - scoreText
     var scoreText = this.add.text(16, 20, 'score: 0', { fontSize: '32px', color: '#000' });
     
@@ -45,7 +48,8 @@ export default class Demo extends Phaser.Scene {
 
     // Colliders (Collision Events)
     this.physics.add.collider(player, platforms); // Collision of Players -> Platform
-
+    this.physics.add.collider(bombs, platforms); // Collision of Bombs -> Platform
+  
     // Overlaps
     
     // Animations
