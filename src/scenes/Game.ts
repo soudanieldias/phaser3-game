@@ -13,11 +13,11 @@ export default class Demo extends Phaser.Scene {
     this.load.image('form', '/assets/forms.png');
 
     // Sprites
-    this.load.spritesheet('dude', '../public/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.spritesheet('dude', '/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 
     // Audios - Songs - Effects
-    this.load.audio('backgroundSong', ['../public/assets/audio/backgroundSong.mp3']);
-  
+    this.load.audio('backgroundSong', ['/assets/audio/backgroundSong.mp3']);
+
   }
 
   create() { // Assignment & Bind of elements to Scene
