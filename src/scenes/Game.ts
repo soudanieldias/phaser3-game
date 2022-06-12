@@ -21,6 +21,7 @@ export default class Demo extends Phaser.Scene {
   }
 
   create() { // Assignment & Bind of elements to Scene
+    // Images
     this.add.image(400, 300, 'sky');
 
     const backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
