@@ -78,6 +78,8 @@ export default class Demo extends Phaser.Scene {
     var backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
     backgroundSong.play();
 
+    // Events
+    // Event - Cursor
     var cursors = this.input.keyboard.createCursorKeys();
 
   }
