@@ -7,10 +7,10 @@ export default class Demo extends Phaser.Scene {
 
   preload() { // Preload of elements used in game (images, songs, etc)
     // Images
-    this.load.image('sky', '../public/assets/sky.png');
-    this.load.image('ground', '../public/assets/platform.png');
-    this.load.image('star', '../public/assets/star.png');
-    this.load.image('form', '../public/assets/forms.png');
+    this.load.image('sky', '/assets/sky.png');
+    this.load.image('ground', '/assets/platform.png');
+    this.load.image('star', '/assets/star.png');
+    this.load.image('form', '/assets/forms.png');
 
     // Sprites
     this.load.spritesheet('dude', '../public/assets/dude.png', { frameWidth: 32, frameHeight: 48 });
