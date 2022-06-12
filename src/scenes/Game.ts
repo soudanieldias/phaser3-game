@@ -15,6 +15,10 @@ export default class Demo extends Phaser.Scene {
 
   private stars: Phaser.Physics.Arcade.Group;
 
+  private bombs: Phaser.Physics.Arcade.Group;
+
+  private backgroundSong: Phaser.Sound;
+
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
     this.load.image('sky', '/assets/sky.png');
@@ -48,7 +52,7 @@ export default class Demo extends Phaser.Scene {
     this.player.setCollideWorldBounds(true);
 
     // Element - Bombs
-    var bombs = this.physics.add.group();
+    this.bombs = this.physics.add.group();
   
     // Element - scoreText & scoreValue
     var scoreText = this.add.text(16, 20, 'score: 0', { fontSize: '32px', color: '#000' });
@@ -71,7 +75,7 @@ export default class Demo extends Phaser.Scene {
 
     // Colliders (Collision Events)
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
-    this.physics.add.collider(bombs, this.platforms); // Collision of Bombs -> Platform
+    this.physics.add.collider(this.bombs, this.platforms); // Collision of Bombs -> Platform
     this.physics.add.collider(this.stars, this.platforms); // Collision of Stars -> Platform
   
     // Overlaps
@@ -99,8 +103,8 @@ export default class Demo extends Phaser.Scene {
     });
 
     // Audios - Songs - Effects
-    var backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
-    backgroundSong.play();
+    this.backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
+    this.backgroundSong.play();
 
     // Events
     // Event - Cursor
