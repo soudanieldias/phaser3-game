@@ -9,7 +9,11 @@ export default class Demo extends Phaser.Scene {
 
   private platforms: Phaser.Physics.Arcade.StaticGroup;
 
+  private scoreText: Phaser.Types.GameObjects.Text.TextStyle;
+
   private scoreValue: number = 0;
+
+  private levelText: Phaser.Types.GameObjects.Text.TextStyle;
 
   private levelValue: number = 1;
 
@@ -57,11 +61,11 @@ export default class Demo extends Phaser.Scene {
     this.bombs = this.physics.add.group();
   
     // Element - scoreText & scoreValue
-    var scoreText = this.add.text(16, 20, 'score: 0', { fontSize: '32px', color: '#000' });
+    this.scoreText = this.add.text(16, 20, 'score: 0', { fontSize: '32px', color: '#000' });
     // var scoreValue = 0;
 
     // Element - levelText & levelValue
-    var levelText = this.add.text(16, 50, 'Level: 1', { fontSize: '32px', color: '#000' });
+    this.levelText = this.add.text(16, 50, 'Level: 1', { fontSize: '32px', color: '#000' });
     // var levelValue = 1;
 
     // Element - Stars
