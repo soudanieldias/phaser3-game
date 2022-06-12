@@ -37,6 +37,9 @@ export default class Demo extends Phaser.Scene {
     player.setBounce(0.2);
     player.setCollideWorldBounds(true);
 
+    // Colliders (Collision Events)
+    this.physics.add.collider(player, platforms); // Collision of Players -> Platform
+
   }
 
   update () {
