@@ -43,6 +43,8 @@ export default class Demo extends Phaser.Scene {
     // Overlaps
     
     // Audios - Songs - Effects
+    var backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
+    backgroundSong.play();
 
   }
 
