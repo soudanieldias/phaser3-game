@@ -146,6 +146,12 @@ export default class Demo extends Phaser.Scene {
     });
   }
 
+  private enableStars () {
+    this.stars.children.iterate((child) => {
+      child.enableBody(true, child.x, 0, true, true);
+    });
+  }
+
   private collectStar (_player:any, star:any) {
     star.disableBody(true, true);
 
@@ -156,6 +162,7 @@ export default class Demo extends Phaser.Scene {
       this.powerUpSong.play();
       this.levelValue += 1;
       this.levelText.setText('Level: ' + this.levelValue);
+      this.enableStars();
     }
   }
 }
