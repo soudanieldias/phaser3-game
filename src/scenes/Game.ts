@@ -9,11 +9,11 @@ export default class Demo extends Phaser.Scene {
 
   private platforms: Phaser.Physics.Arcade.StaticGroup;
 
-  private scoreText: Phaser.Types.GameObjects.Text.TextStyle;
+  private scoreText: any;
 
   private scoreValue: number = 0;
 
-  private levelText: Phaser.Types.GameObjects.Text.TextStyle;
+  private levelText: any;
 
   private levelValue: number = 1;
 
@@ -136,5 +136,12 @@ export default class Demo extends Phaser.Scene {
     if (this.cursors.up.isDown && this.player.body.touching.down) {
       this.player.setVelocityY(-330);
     }
+  }
+
+  private collectStar (_player:any, star:any) {
+    star.disableBody(true, true);
+
+    this.scoreValue += 10;
+    this.scoreText.setText('Score: ' + this.scoreValue);
   }
 }
