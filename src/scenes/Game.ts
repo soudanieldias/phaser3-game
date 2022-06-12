@@ -25,6 +25,8 @@ export default class Demo extends Phaser.Scene {
 
   private powerUpSong: Phaser.Sound.BaseSound;
 
+  private deathSong: Phaser.Sound.BaseSound;
+
   private cursors: any;
 
   public preload () { // Preload of elements used in game (images, songs, etc)
@@ -40,6 +42,7 @@ export default class Demo extends Phaser.Scene {
     // Audios - Songs - Effects
     this.load.audio('backgroundSong', ['/assets/audio/backgroundSong.mp3']);
     this.load.audio('powerUp', ['assets/audio/powerup.mp3']);
+    this.load.audio('deathSong', ['assets/audio/death.mp3'])
   }
 
   public create () { // Assignment & Bind of elements to Scene
@@ -83,6 +86,7 @@ export default class Demo extends Phaser.Scene {
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
     this.physics.add.collider(this.bombs, this.platforms); // Collision of Bombs -> Platform
     this.physics.add.collider(this.stars, this.platforms); // Collision of Stars -> Platform
+    this.physics.add.collider(this.player, this.bombs, this.bombHit, undefined, this);
 
     // Overlaps
     this.physics.add.overlap(this.player, this.stars, this.collectStar, undefined, this);
@@ -113,6 +117,7 @@ export default class Demo extends Phaser.Scene {
     this.backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
     this.backgroundSong.play();
     this.powerUpSong = this.sound.add('powerUp');
+    this.deathSong = this.sound.add('deathSong');
 
     // Events
     // Event - Cursor
@@ -159,6 +164,14 @@ export default class Demo extends Phaser.Scene {
     newBomb.setBounce(1);
     newBomb.setCollideWorldBounds(true);
     newBomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+  }
+
+  private bombHit () {
+    this.physics.pause();
+    this.backgroundSong.stop();
+    this.player.setTint(0xff0000);
+    this.player.anims.play('turn');
+    this.deathSong.play();
   }
 
   private collectStar (_player:any, star:any) {
