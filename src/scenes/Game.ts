@@ -23,6 +23,8 @@ export default class Demo extends Phaser.Scene {
 
   private backgroundSong: Phaser.Sound.BaseSound;
 
+  private powerUpSong: Phaser.Sound.BaseSound;
+
   private cursors: any;
 
   public preload () { // Preload of elements used in game (images, songs, etc)
@@ -37,7 +39,7 @@ export default class Demo extends Phaser.Scene {
 
     // Audios - Songs - Effects
     this.load.audio('backgroundSong', ['/assets/audio/backgroundSong.mp3']);
-
+    this.load.audio('powerUp', ['assets/audio/powerup.mp3']);
   }
 
   public create () { // Assignment & Bind of elements to Scene
@@ -112,6 +114,7 @@ export default class Demo extends Phaser.Scene {
     // Audios - Songs - Effects
     this.backgroundSong = this.sound.add('backgroundSong', {volume: 0.3});
     this.backgroundSong.play();
+    this.powerUpSong = this.sound.add('powerUp');
 
     // Events
     // Event - Cursor
@@ -144,5 +147,11 @@ export default class Demo extends Phaser.Scene {
 
     this.scoreValue += 10;
     this.scoreText.setText('Score: ' + this.scoreValue);
+
+    if (this.stars.countActive(true) === 0) {
+      this.powerUpSong.play();
+      this.levelValue += 1;
+      this.levelText.setText('Level: ' + this.levelValue);
+    }
   }
 }
