@@ -83,7 +83,7 @@ export default class Demo extends Phaser.Scene {
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
     this.physics.add.collider(this.bombs, this.platforms); // Collision of Bombs -> Platform
     this.physics.add.collider(this.stars, this.platforms); // Collision of Stars -> Platform
-  
+
     // Overlaps
     this.physics.add.overlap(this.player, this.stars, this.collectStar, undefined, this);
   
@@ -152,6 +152,15 @@ export default class Demo extends Phaser.Scene {
     });
   }
 
+  private generateBomb () {
+    const x = (this.player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+    const newBomb = this.bombs.create(x, 16, 'form');
+
+    newBomb.setBounce(1);
+    newBomb.setCollideWorldBounds(true);
+    newBomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+  }
+
   private collectStar (_player:any, star:any) {
     star.disableBody(true, true);
 
@@ -163,6 +172,7 @@ export default class Demo extends Phaser.Scene {
       this.levelValue += 1;
       this.levelText.setText('Level: ' + this.levelValue);
       this.enableStars();
+      this.generateBomb();
     }
   }
 }
