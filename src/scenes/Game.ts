@@ -168,6 +168,7 @@ export default class Demo extends Phaser.Scene {
     newBomb.setBounce(1);
     newBomb.setCollideWorldBounds(true);
     newBomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    newBomb.setScale(0.5);
   }
 
   private bombHit () {
