@@ -85,7 +85,8 @@ export default class Demo extends Phaser.Scene {
     this.physics.add.collider(this.stars, this.platforms); // Collision of Stars -> Platform
   
     // Overlaps
-    
+    this.physics.add.overlap(this.player, this.stars, this.collectStar, undefined, this);
+  
     // Animations
     // Animation - Player
     this.anims.create({
