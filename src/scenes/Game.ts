@@ -33,6 +33,9 @@ export default class Demo extends Phaser.Scene {
 
   private restartButton: any;
 
+  // private isPaused: boolean = false;
+  // private pauseButton: any;
+
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
     this.load.image('sky', '/assets/sky.png');
@@ -93,6 +96,11 @@ export default class Demo extends Phaser.Scene {
     .on('pointerdown', () => this.resetGame())
     .on('pointerover', () => this.restartButton.setStyle({ color: '#f39c12' }))
     .on('pointerout', () => this.restartButton.setStyle({ color: '#FFF' }))
+
+    // Element - pauseButton
+    // this.pauseButton = this.add.text(600, 40, 'Pause', { fontSize: '32px', color: '#000' })
+    // .setInteractive({ useHandCursor: true })
+    // .on('pointerdown', () => this.pauseGame());
 
     // Colliders (Collision Events)
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
@@ -185,6 +193,12 @@ export default class Demo extends Phaser.Scene {
     this.scene.restart();
     this.levelValue = 1;
     this.scoreValue = 0;
+  }
+
+  private pauseGame () {
+    this.backgroundSong.pause();
+    this.scene.pause();
+    this.scene.start('PauseScene');
   }
 
   private bombHit () {
