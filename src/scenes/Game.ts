@@ -36,6 +36,8 @@ export default class Game extends Phaser.Scene {
   private isPaused: boolean = false;
   // private pauseButton: any;
 
+  private invencibility: boolean = false;
+
   public preload () { // Preload of elements used in game (images, songs, etc)
     // Images
     this.load.image('sky', '/assets/sky.png');
@@ -194,6 +196,7 @@ export default class Game extends Phaser.Scene {
   private resetGame () {
     this.backgroundSong.stop();
     this.scene.restart();
+    if (this.invencibility) { this.invencibility = true }
     this.levelValue = 1;
     this.scoreValue = 0;
   }
@@ -211,6 +214,7 @@ export default class Game extends Phaser.Scene {
   }
 
   private bombHit () {
+    if(this.invencibility) return;
     this.physics.pause();
     this.backgroundSong.stop();
     this.player.setTint(0xff0000);
@@ -234,19 +238,15 @@ export default class Game extends Phaser.Scene {
     }
   }
 
+  private handleInvencibility = () => {
+    this.invencibility = !this.invencibility;
+    console.log(`Invencibility: ${this.invencibility}`);
+  }
+
   private handleKey ({ key }) {
-    switch (key) {
-      case 'r':
-        this.isPaused = false;
-        this.resetGame();
-        break;
-      case 'p':
-        this.pauseGame();
-        break;
-      case 'e':
-        this.generateBomb();
-      default:
-        break;
-    }
+    if(key ==='r') { this.isPaused = false; this.resetGame(); }
+    if(key ==='p') { this.pauseGame(); }
+    if(key ==='e') { this.generateBomb(); }
+    if(key ==='i') { this.handleInvencibility(); }
   }
 }
