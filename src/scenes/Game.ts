@@ -33,7 +33,7 @@ export default class Game extends Phaser.Scene {
 
   private restartButton: any;
 
-  // private isPaused: boolean = false;
+  private isPaused: boolean = false;
   // private pauseButton: any;
 
   public preload () { // Preload of elements used in game (images, songs, etc)
@@ -96,6 +96,9 @@ export default class Game extends Phaser.Scene {
     .on('pointerdown', () => this.resetGame())
     .on('pointerover', () => this.restartButton.setStyle({ color: '#f39c12' }))
     .on('pointerout', () => this.restartButton.setStyle({ color: '#FFF' }))
+    
+    // Element - handleKey
+    this.input.keyboard.on('keydown', (event:Event) => { this.handleKey(event) }, this);
 
     // Element - pauseButton
     // this.pauseButton = this.add.text(600, 40, 'Pause', { fontSize: '32px', color: '#000' })
@@ -196,9 +199,15 @@ export default class Game extends Phaser.Scene {
   }
 
   private pauseGame () {
-    this.backgroundSong.pause();
-    this.scene.pause();
-    this.scene.start('PauseScene');
+    if(this.isPaused) {
+      this.isPaused = false;
+      this.backgroundSong.resume();
+      this.physics.resume();
+    } else {
+      this.isPaused = true;
+      this.backgroundSong.pause();
+      this.physics.pause();
+    }
   }
 
   private bombHit () {
@@ -222,6 +231,22 @@ export default class Game extends Phaser.Scene {
       this.levelText.setText('Level: ' + this.levelValue);
       this.enableStars();
       this.generateBomb();
+    }
+  }
+
+  private handleKey ({ key }) {
+    switch (key) {
+      case 'r':
+        this.isPaused = false;
+        this.resetGame();
+        break;
+      case 'p':
+        this.pauseGame();
+        break;
+      case 'e':
+        this.generateBomb();
+      default:
+        break;
     }
   }
 }
