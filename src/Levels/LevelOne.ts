@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 
-export default class Main extends Phaser.Scene {
+export default class LevelOne extends Phaser.Scene {
   constructor() {
-    super('MainScene');
+    super('LevelOneScene');
   }
 
   public preload () { // Preload of elements used in game (images, songs, etc)
