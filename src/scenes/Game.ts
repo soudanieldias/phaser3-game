@@ -110,6 +110,7 @@ export default class Game extends Phaser.Scene {
     // Colliders (Collision Events)
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
     this.physics.add.collider(this.bombs, this.platforms); // Collision of Bombs -> Platform
+    // this.physics.add.collider(this.bombs, this.bombs); // Collision of Bombs -> Bombs
     this.physics.add.collider(this.stars, this.platforms); // Collision of Stars -> Platform
     this.physics.add.collider(this.player, this.bombs, this.bombHit, undefined, this);
 
