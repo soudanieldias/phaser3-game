@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
 import config from './config';
-import GameScene from './scenes/Game';
-import PauseScene from './scenes/Pause';
+import { LevelOne } from './Levels';
+import { Game, Pause } from './scenes';
 
 new Phaser.Game(
   Object.assign(config, {
-    scene: [GameScene, PauseScene]
+    scene: [LevelOne, Pause],
   })
 );
