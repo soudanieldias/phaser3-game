@@ -1,10 +1,11 @@
 import Phaser from 'phaser';
 
 export default class LevelOne extends Phaser.Scene {
+
   constructor() {
     super('LevelOneScene');
   }
-  
+
   private player: Phaser.Physics.Arcade.Sprite;
 
   private platforms: Phaser.Physics.Arcade.StaticGroup;
@@ -28,6 +29,8 @@ export default class LevelOne extends Phaser.Scene {
   private deathSong: Phaser.Sound.BaseSound;
 
   private collectSong: Phaser.Sound.BaseSound;
+
+  private hitBoxSong: Phaser.Sound.BaseSound;
 
   private cursors: any;
 
@@ -58,7 +61,7 @@ export default class LevelOne extends Phaser.Scene {
   public create () { // Assignment & Bind of elements to Scene
     // Images
     this.add.image(400, 300, 'sky');
-    
+
     // Elements
     // Element - Platforms
     this.platforms = this.physics.add.staticGroup();
@@ -97,15 +100,17 @@ export default class LevelOne extends Phaser.Scene {
     .setInteractive({ useHandCursor: true })
     .on('pointerdown', () => this.resetGame())
     .on('pointerover', () => this.restartButton.setStyle({ color: '#f39c12' }))
-    .on('pointerout', () => this.restartButton.setStyle({ color: '#FFF' }))
+    .on('pointerout', () => this.restartButton.setStyle({ color: '#000' }))
     
     // Element - handleKey
     this.input.keyboard.on('keydown', (event:Event) => { this.handleKey(event) }, this);
 
     // Element - pauseButton
-    // this.pauseButton = this.add.text(600, 40, 'Pause', { fontSize: '32px', color: '#000' })
-    // .setInteractive({ useHandCursor: true })
-    // .on('pointerdown', () => this.pauseGame());
+    this.pauseButton = this.add.text(600, 45, 'Pause', { fontSize: '32px', color: '#000' })
+    .setInteractive({ useHandCursor: true })
+    .on('pointerdown', () => this.pauseGame())
+    .on('pointerover', () => this.pauseButton.setStyle({ color: '#f39c12' }))
+    .on('pointerout', () => this.pauseButton.setStyle({ color: '#000' }));
 
     // Colliders (Collision Events)
     this.physics.add.collider(this.player, this.platforms); // Collision of Players -> Platform
@@ -180,7 +185,7 @@ export default class LevelOne extends Phaser.Scene {
 
   private enableStars () {
     this.stars.children.iterate((child) => {
-      child.enableBody(true, child.x, 0, true, true);
+      (child as Phaser.Physics.Arcade.Body).enableBody(true, child.x, 0, true, true);
     });
   }
 
@@ -249,5 +254,9 @@ export default class LevelOne extends Phaser.Scene {
     if(key ==='p') { this.pauseGame(); }
     if(key ==='e') { this.generateBomb(); }
     if(key ==='i') { this.handleInvencibility(); }
+    if(key === ' ') {
+      console.log('X: ', this.game.input.mousePointer.x);
+      console.log('Y: ', this.game.input.mousePointer.y);
+    }
   }
 }
